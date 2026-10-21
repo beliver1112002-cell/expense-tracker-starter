@@ -1,4 +1,4 @@
-function TransactionList({ transactions }) {
+function TransactionList({ transactions, onDelete }) {
   return (
     <table>
       <thead>
@@ -7,6 +7,7 @@ function TransactionList({ transactions }) {
           <th>Description</th>
           <th>Category</th>
           <th>Amount</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -17,6 +18,16 @@ function TransactionList({ transactions }) {
             <td>{t.category}</td>
             <td className={t.type === "income" ? "income-amount" : "expense-amount"}>
               {t.type === "income" ? "+" : "-"}${t.amount}
+            </td>
+            <td>
+              <button
+                className="delete-btn"
+                onClick={() => {
+                  if (window.confirm(`Delete "${t.description}"?`)) onDelete(t.id);
+                }}
+              >
+                Delete
+              </button>
             </td>
           </tr>
         ))}

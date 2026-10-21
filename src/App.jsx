@@ -33,6 +33,10 @@ function App() {
     setTransactions([...transactions, newTransaction]);
   };
 
+  const handleDelete = (id) => {
+    setTransactions(transactions.filter(t => t.id !== id));
+  };
+
   return (
     <div className="app">
       <h1>Finance Tracker</h1>
@@ -58,7 +62,7 @@ function App() {
           </select>
         </div>
 
-        <TransactionList transactions={filteredTransactions} />
+        <TransactionList transactions={filteredTransactions} onDelete={handleDelete} />
       </div>
     </div>
   );
